@@ -775,6 +775,7 @@ GameObject:
   - component: {fileID: 109071004}
   - component: {fileID: 109071003}
   - component: {fileID: 109071002}
+  - component: {fileID: 109071005}
   m_Layer: 6
   m_Name: XR Origin (XR Rig)
   m_TagString: Untagged
@@ -934,7 +935,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 109070994}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af6bf904e410ee8479f9093d8830d1f8, type: 3}
   m_Name: 
@@ -1026,6 +1027,19 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: -6493913391331992944, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
+--- !u!114 &109071005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109070994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca4e00087e8e07a44a9c1b90b26bbeb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BendEnablerTag: BendEnabler
 --- !u!1001 &116685650
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2888,6 +2902,59 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 753730915}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &772528405
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 772528406}
+  - component: {fileID: 772528407}
+  m_Layer: 0
+  m_Name: BendEnabler
+  m_TagString: BendEnabler
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &772528406
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772528405}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2115114926}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &772528407
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772528405}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.92176193, y: 0.7949754, z: 3.820013}
+  m_Center: {x: 0.00000011920929, y: 0.397861, z: 0.000000059604645}
 --- !u!1001 &778544780
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4931,8 +4998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e398e11eeebcd34a8e163a95a6e86e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  socketInteractor: {fileID: 0}
-  sceneToLoad: 
+  socketInteractor: {fileID: 1393720375}
 --- !u!1 &1410832478
 GameObject:
   m_ObjectHideFlags: 0
@@ -6311,6 +6377,12 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!4 &2115114926 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4534449285516404, guid: 0941535f5a7c0d846a45a6370dc4036b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2120482803}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2120482803
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6366,7 +6438,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4534449285516404, guid: 0941535f5a7c0d846a45a6370dc4036b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 772528406}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0941535f5a7c0d846a45a6370dc4036b, type: 3}
 --- !u!1 &2123124137
