@@ -4764,6 +4764,7 @@ GameObject:
   - component: {fileID: 1393720377}
   - component: {fileID: 1393720376}
   - component: {fileID: 1393720375}
+  - component: {fileID: 1393720380}
   m_Layer: 0
   m_Name: King_Socket
   m_TagString: Untagged
@@ -4918,6 +4919,20 @@ Transform:
   - {fileID: 56488616}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1393720380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393720374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e398e11eeebcd34a8e163a95a6e86e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  socketInteractor: {fileID: 0}
+  sceneToLoad: 
 --- !u!1 &1410832478
 GameObject:
   m_ObjectHideFlags: 0
