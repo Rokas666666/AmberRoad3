@@ -8,22 +8,46 @@ public class ObjectPlacement : MonoBehaviour
 {
     public GameObject objectToPlace; // This is the object you want to place.
     public XRController controller; // Reference to the XRController.
+    public XRRayInteractor ray;
+
+    public List<GameObject> spheres;
+    public LineRenderer lineRenderer;
+
+    private void Start()
+    {
+        lineRenderer = gameObject.AddComponent<LineRenderer>();
+        lineRenderer.material = new Material(Shader.Find("OrangeLine"));
+    }
 
     private void Update()
     {
         if (controller.inputDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool isButtonPressed) && isButtonPressed)
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit))
+            if (ray.TryGetCurrent3DRaycastHit(out hit))
             {
-                Debug.Log(hit.point);
-                Instantiate(objectToPlace, hit.point, Quaternion.identity);
-                if (hit.collider.gameObject.name == "SpawnSphere")
+                if (hit.collider.gameObject.name == "Landscape")
                 {
-                    Debug.Log("Hit the Landscape!");
-                    Instantiate(objectToPlace, hit.point, Quaternion.identity);
+                    //Debug.Log("Hit the Landscape!");
+                    spheres.Add(Instantiate(objectToPlace, hit.point, Quaternion.identity));
                 }
             }
+        }
+        else
+        {
+            if (spheres.Count > 10)
+            {
+                
+                lineRenderer.widthMultiplier = 0.03f; // Adjust the width of the line
+
+                lineRenderer.positionCount = spheres.Count;
+
+                for (int i = 0; i < spheres.Count; i++)
+                {
+                    lineRenderer.SetPosition(i, spheres[i].transform.position);
+                }
+            }
+            spheres.Clear();
         }
     }
 }
