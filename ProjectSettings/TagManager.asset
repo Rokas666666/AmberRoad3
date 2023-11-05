@@ -8,6 +8,7 @@ TagManager:
   - LeftHand
   - BendEnabler
   - Landscape
+  - Enemy
   layers:
   - Default
   - TransparentFX
