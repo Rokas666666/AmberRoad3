@@ -9,6 +9,7 @@ TagManager:
   - BendEnabler
   - Landscape
   - Enemy
+  - Tower
   layers:
   - Default
   - TransparentFX
@@ -21,8 +22,8 @@ TagManager:
   - Markers
   - 
   - WhatIsGround
-  - 
-  - 
+  - TowerLayer
+  - GroundLayer
   - 
   - 
   - 
