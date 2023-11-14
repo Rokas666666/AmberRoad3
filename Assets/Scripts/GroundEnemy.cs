@@ -11,7 +11,9 @@ public class GroundEnemy : MonoBehaviour
     GameObject target;
 
     [SerializeField] LayerMask groundLayer, targetLayer;
+
     
+
     //patrol
     Vector3 destPoint;
     bool walkPointSet;
@@ -19,7 +21,7 @@ public class GroundEnemy : MonoBehaviour
 
     //attacking
     float timeBetweenAttacks;
-    float attaackTimer;
+    float attackTimer;
     bool canAttack;
 
     //state change
@@ -29,16 +31,15 @@ public class GroundEnemy : MonoBehaviour
     void Start()
     {
         target = GameObject.FindWithTag("Tower");
-        //Debug.Log(target.GetInstanceID());
         agent = GetComponent<NavMeshAgent>();
-
     }
+  
     private void Update()
     {
         targetInSight = Physics.CheckSphere(transform.position, sightRange, targetLayer);
         targetInAttack = Physics.CheckSphere(transform.position, attackRange, targetLayer);
-
-        if(!targetInSight && !targetInAttack)
+        
+        if (!targetInSight && !targetInAttack)
         {
             Debug.Log("Patrol");
             Patrol();
@@ -53,18 +54,37 @@ public class GroundEnemy : MonoBehaviour
             Debug.Log("Attack");
             Attack();
         }
-        /*if(Vector3.Distance(transform.position, destPoint) < 1)
+        /*if (Vector3.Distance(transform.position, destPoint) < 1)
         {
             walkPointSet = false;
         }*/
+    }
+    
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(transform.position, sightRange);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position, attackRange);
     }
     void Attack()
     {
         //will do for now
         if (agent.SetDestination(target.transform.position))
         {
-            Debug.Log("Target found: " + target.name);
+            Debug.Log("Attack target found: " + target.name);
         }
+        //transform.LookAt(target.transform);
+       // agent.isStopped = true;
+        if(!canAttack)
+        {
+            canAttack = true;
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+        }
+    }
+    private void ResetAttack()
+    {
+        canAttack = false;
     }
     void Patrol()
     {
@@ -77,7 +97,12 @@ public class GroundEnemy : MonoBehaviour
         {
             agent.SetDestination(destPoint);
         }
-        if(Vector3.Distance(transform.position, destPoint)<10) { walkPointSet = false; }
+        Vector3 distanceToDestPoint = transform.position - destPoint;
+        if(distanceToDestPoint.magnitude < 1f)
+        {
+            walkPointSet = false;
+        }
+        //if(Vector3.Distance(transform.position, destPoint)<10) { walkPointSet = false; }
     }
     void SearchForWalkPoint()
     {
@@ -86,7 +111,7 @@ public class GroundEnemy : MonoBehaviour
 
         destPoint = new Vector3(transform.position.x + X, transform.position.y, transform.position.z + Z);
 
-        if(Physics.Raycast(destPoint, Vector3.down, 5f, groundLayer))
+        if(Physics.Raycast(destPoint, -transform.up, 2f, groundLayer))
         {
             walkPointSet = true;
         }
@@ -95,7 +120,8 @@ public class GroundEnemy : MonoBehaviour
     {
         if(agent.SetDestination(target.transform.position))
         {
-            Debug.Log("Target found: " + target.name);
+            Debug.Log("Chase target found: " + target.name);
         }
+
     }
 }

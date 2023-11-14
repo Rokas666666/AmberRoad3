@@ -11,6 +11,8 @@ public class Projectile : MonoBehaviour
     private float MoveSpeed = 1f;
     [SerializeField]
     private string EnemyTag = "Enemy";
+    [SerializeField]
+    float damage;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,10 +31,19 @@ public class Projectile : MonoBehaviour
     }
     public void OnCollisionEnter(Collision collision)
     {
+        var target = collision.gameObject.GetComponent<Enemy>();
+        var building = collision.gameObject.GetComponent<HealthManager>();
         var other = collision.gameObject;
-        if (other.CompareTag(EnemyTag))
+        if (other.CompareTag(EnemyTag) && EnemyTag == "Enemy")
         {
+            target.DamageEnemy(damage);
+            Destroy(this.gameObject);
+        }
+        if (other.CompareTag(EnemyTag) && EnemyTag == "Tower")
+        {
+            building.Damage(damage);
             Destroy(this.gameObject);
         }
     }
+    
 }

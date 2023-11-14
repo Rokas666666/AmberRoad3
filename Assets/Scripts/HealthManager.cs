@@ -11,6 +11,13 @@ public class HealthManager : MonoBehaviour
     {
         HP = maxHP;
     }
+    private void Update()
+    {
+        if (HP == 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public float getHP()
     {
@@ -18,6 +25,7 @@ public class HealthManager : MonoBehaviour
     }
     public void Damage(float damage)
     {
+        Debug.Log("Tower Hp: " + HP);
         HP -= damage;
         if(HP < 0) HP = 0;
     }
