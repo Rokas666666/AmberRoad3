@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tower : MonoBehaviour
+public class Tower : Building
 {
     [SerializeField]
     private List<GameObject> Targets = new List<GameObject>();
@@ -19,6 +19,7 @@ public class Tower : MonoBehaviour
     void Start()
     {
         InvokeRepeating("Shoot", 1, FireRate);
+        resources = 0;
     }
 
     private void OnTriggerEnter(Collider other)

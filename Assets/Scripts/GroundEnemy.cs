@@ -41,17 +41,17 @@ public class GroundEnemy : MonoBehaviour
         
         if (!targetInSight && !targetInAttack)
         {
-            Debug.Log("Patrol");
+            //Debug.Log("Patrol");
             Patrol();
         }
         if(targetInSight && !targetInAttack)
         {
-            Debug.Log("Chase");
+            //Debug.Log("Chase");
             Chase();
         }
         if(targetInSight && targetInAttack)
         {
-            Debug.Log("Attack");
+            //Debug.Log("Attack");
             Attack();
         }
         /*if (Vector3.Distance(transform.position, destPoint) < 1)
@@ -72,7 +72,7 @@ public class GroundEnemy : MonoBehaviour
         //will do for now
         if (agent.SetDestination(target.transform.position))
         {
-            Debug.Log("Attack target found: " + target.name);
+            //Debug.Log("Attack target found: " + target.name);
         }
         //transform.LookAt(target.transform);
        // agent.isStopped = true;
@@ -120,7 +120,7 @@ public class GroundEnemy : MonoBehaviour
     {
         if(agent.SetDestination(target.transform.position))
         {
-            Debug.Log("Chase target found: " + target.name);
+            //Debug.Log("Chase target found: " + target.name);
         }
 
     }
