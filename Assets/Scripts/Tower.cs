@@ -21,9 +21,28 @@ public class Tower : Building
         InvokeRepeating("Shoot", 1, FireRate);
         resources = 0;
     }
+    /*
+    void OnCollisionEnter(Collision collision)
+    {
+        // Check if the collision involves the specified layer
+        if (collision.gameObject.layer == 15)
+        {
+            addResources(1);
+            Destroy(collision.gameObject);
+            // The collision involves the target layer
+            // Your code for handling the collision with the specific layer
+        }
+    }*/
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.layer == 15)
+        {
+            addResources(1);
+            Destroy(other.gameObject);
+            // The collision involves the target layer
+            // Your code for handling the collision with the specific layer
+        }
         if (other.CompareTag(EnemyTag))
         {
             Targets.Add(other.gameObject);

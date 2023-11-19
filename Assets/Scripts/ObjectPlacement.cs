@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -9,6 +10,9 @@ public class ObjectPlacement : MonoBehaviour
     public GameObject objectToPlace; // This is the object you want to place.
     public XRController controller; // Reference to the XRController.
     public XRRayInteractor ray;
+
+    public Building sourceBuilding;
+    public Building targetBuilding;
 
     public List<GameObject> spheres;
     public LineRenderer lineRenderer;
@@ -53,6 +57,12 @@ public class ObjectPlacement : MonoBehaviour
                             {
                                 Debug.Log("finished");
                                 drawState = "finished";
+                                GameObject foundObject = (GameObject)EditorUtility.InstanceIDToObject(startID);
+                                spheres[0].transform.position = foundObject.transform.position;
+                                spheres[spheres.Count].transform.position = hitInfo.collider.gameObject.transform.position;
+                                sourceBuilding = hit.collider.gameObject.GetComponent<Building>();
+                                targetBuilding = hitInfo.collider.gameObject.GetComponent<Building>();
+                                sourceBuilding.target = targetBuilding;
                             }
                         }
                     }

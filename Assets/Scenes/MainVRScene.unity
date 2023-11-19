@@ -4183,6 +4183,8 @@ MonoBehaviour:
   objectToPlace: {fileID: 1276118655}
   controller: {fileID: 1798574705}
   ray: {fileID: 1798574709}
+  sourceBuilding: {fileID: 0}
+  targetBuilding: {fileID: 0}
   spheres: []
   lineRenderer: {fileID: 0}
   drawState: 
@@ -4572,7 +4574,8 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 767392687147397298, guid: afd8282dee95cdf48aa60c30e876e77f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6684470580500784695, guid: afd8282dee95cdf48aa60c30e876e77f,
@@ -4783,6 +4786,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resources: 0
+  target: {fileID: 0}
   period: 0
   sendPeriod: 0
   setPeriod: 0
@@ -5840,7 +5844,7 @@ GameObject:
   - component: {fileID: 1357447580}
   - component: {fileID: 1357447579}
   - component: {fileID: 1357447578}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: ResourceNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5860,6 +5864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   line: []
+  source: {fileID: 0}
   pos: 0
 --- !u!135 &1357447579
 SphereCollider:

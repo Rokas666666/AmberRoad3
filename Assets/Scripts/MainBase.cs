@@ -27,15 +27,16 @@ public class MainBase : Building
         if (setPeriod > 5)
         {
             setPeriod = 0;
-            if (obj.drawState == "disabled")
+            if (obj.drawState == "disabled" && obj.spheres.Count > 3)
             {
                 line = obj.spheres;
             }
-            line = obj.spheres;
+            //line = obj.spheres;
         }
         if (sendPeriod > 2)
         {
             sendPeriod = 0;
+            resources -= 1;
             GameObject newResourceNode = Instantiate(resourceNodeObject, line[0].transform.position, Quaternion.identity);
             ResourceNode resourceNodeScript = newResourceNode.GetComponent<ResourceNode>();
 
@@ -43,6 +44,14 @@ public class MainBase : Building
             {
                 resourceNodeScript.line = line;
             }
+            if (line != null)
+            {
+                if (line[0] != null)
+                {
+                    
+                }
+            }
+            
         }
         period += Time.deltaTime;
         sendPeriod += Time.deltaTime;

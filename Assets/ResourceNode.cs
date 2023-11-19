@@ -5,6 +5,7 @@ using UnityEngine;
 public class ResourceNode : MonoBehaviour
 {
     public List<GameObject> line;
+    public Building source;
     public int pos = 0;
 
     // Start is called before the first frame update
@@ -16,7 +17,7 @@ public class ResourceNode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (line != null)
+        if (line != null && line[pos] != null)
         {
             Vector3 direction = line[pos].transform.position - transform.position;
 
@@ -30,7 +31,13 @@ public class ResourceNode : MonoBehaviour
             if (Vector3.Distance(transform.position, line[pos].transform.position) < 0.1f)
             {
                 // Move to the next node in the line
-                pos = (pos + 1) % line.Count;
+                pos++;
+                /*
+                if (pos == line.Count)
+                {
+                    target.addResources(1);
+                    Destroy(gameObject);
+                }*/
             }
         }
     }

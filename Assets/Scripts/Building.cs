@@ -6,7 +6,9 @@ public abstract class Building : MonoBehaviour
 {
     [SerializeField]
     public int resources;
-    
+    [SerializeField]
+    public Building target;
+
     public int takeResources(int amount)
     {
         if (amount > resources)
@@ -22,7 +24,7 @@ public abstract class Building : MonoBehaviour
         }
     }
 
-    public void receiveResources(int amount)
+    public void addResources(int amount)
     {
         resources += amount;
     }
