@@ -22,7 +22,9 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Target == null) { return; }
+        if (Target == null) { 
+            Destroy(this.gameObject);
+            return; }
         transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, MoveSpeed*Time.deltaTime);
     }
     public void SetTarget(GameObject target)
