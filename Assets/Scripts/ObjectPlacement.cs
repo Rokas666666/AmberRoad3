@@ -8,14 +8,21 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class ObjectPlacement : MonoBehaviour
 {
     public GameObject objectToPlace; // This is the object you want to place.
+    public GameObject test;
     public XRController controller; // Reference to the XRController.
     public XRRayInteractor ray;
 
     public Building sourceBuilding;
     public Building targetBuilding;
+    public GameObject sourceObject;
 
     public List<GameObject> spheres;
-    public LineRenderer lineRenderer;
+    //public LineRenderer lineRenderer;
+    public Material lineMat;
+
+    public List<LineRenderer> finishedLines;
+    public List<List<GameObject>> finishedSpheres;
+    public int lineCount;
 
     public string drawState;
     public int startID;
@@ -23,71 +30,118 @@ public class ObjectPlacement : MonoBehaviour
     private void Start()
     {
         drawState = "disabled";
-        lineRenderer = gameObject.AddComponent<LineRenderer>();
-        lineRenderer.material = new Material(Shader.Find("Standard"));
-        lineRenderer.material.color = Color.yellow;
+        finishedLines = new List<LineRenderer>();
+        finishedSpheres = new List<List<GameObject>>();
+        finishedLines.Add(gameObject.AddComponent<LineRenderer>());
+        lineCount = 1;
+        finishedLines[lineCount-1].material = lineMat;
+        
     }
 
     private void Update()
     {
-        if (controller.inputDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool isButtonPressed) && isButtonPressed)
+        // if (a is pressed or drawState is finished), raycast works and it hits the landscape - then continue
+        if ((controller.inputDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool isButtonPressed) && isButtonPressed) && drawState != "finished")
         {
             RaycastHit hit;
             if (ray.TryGetCurrent3DRaycastHit(out hit))
             {
                 if (hit.collider.gameObject.name == "Landscape")
                 {
-                    //Debug.Log("Hit the Landscape!");
+                    //create a sphere and check if it raycast hits a tower above it
                     GameObject newSphere = Instantiate(objectToPlace, hit.point, Quaternion.identity);
                     RaycastHit hitInfo;
-                    // Perform a raycast from the position where the object was instantiated
                     if (Physics.Raycast(newSphere.transform.position, Vector3.up, out hitInfo, Mathf.Infinity))
                     {
-                        // Check if the raycast hit something
                         if (hitInfo.collider.gameObject.layer == 11) //TowerLayer
                         {
                             if (drawState == "disabled")
                             {
-                                Debug.Log("started");
+                                //start the drawState if it hasnt started and get the id of the first tower
                                 startID = hitInfo.collider.gameObject.GetInstanceID();
+                                sourceObject = hitInfo.collider.gameObject;
                                 drawState = "started";
                             }
                             else if (drawState == "started" && hitInfo.collider.gameObject.GetInstanceID() != startID)
-                            //else if (drawState == "started")
                             {
-                                Debug.Log("finished");
+                                //end the drawState if the second tower was reached, then find the start end objects and set the line to them
                                 drawState = "finished";
-                                GameObject foundObject = (GameObject)EditorUtility.InstanceIDToObject(startID);
-                                spheres[0].transform.position = foundObject.transform.position;
-                                spheres[spheres.Count].transform.position = hitInfo.collider.gameObject.transform.position;
-                                sourceBuilding = hit.collider.gameObject.GetComponent<Building>();
-                                targetBuilding = hitInfo.collider.gameObject.GetComponent<Building>();
-                                sourceBuilding.target = targetBuilding;
+                                //GameObject startObject = (GameObject)EditorUtility.InstanceIDToObject(startID);
+                                spheres[0].transform.position = sourceObject.transform.position;
+                                spheres[spheres.Count-1].transform.position = hitInfo.collider.gameObject.transform.position; //HERE, WHY DOES IT NOT FIND IT
+                                sourceBuilding = GetBuildingType(sourceObject);
+                                targetBuilding = GetBuildingType(hitInfo.collider.gameObject);
+                                //sourceBuilding.target = targetBuilding;
                             }
                         }
                     }
+                    //if we are drawing a line, add the sphere
                     if (drawState == "started")
                     {
-                        Debug.Log("added");
                         spheres.Add(newSphere);
                     }
+                    
                 }
             }
+            
         }
         else
         {
-            Debug.Log("drawState = " + drawState);
-            if (spheres.Count > 3 && drawState == "finished")
+            
+            if (spheres.Count >= 2 && drawState == "finished")
             {
-                lineRenderer.widthMultiplier = 0.03f; // Adjust the width of the line
-                lineRenderer.positionCount = spheres.Count;
+                drawState = "disabled";
+                
+                
+                finishedLines[lineCount - 1].widthMultiplier = 0.03f; // Adjust the width of the line
+                finishedLines[lineCount - 1].positionCount = spheres.Count;
+                finishedLines[lineCount - 1].material = lineMat;
                 for (int i = 0; i < spheres.Count; i++)
                 {
-                    lineRenderer.SetPosition(i, spheres[i].transform.position);
+                    finishedLines[lineCount - 1].SetPosition(i, spheres[i].transform.position);
                 }
+                lineCount++;
+                finishedSpheres.Add(spheres);
+                if (sourceBuilding == null)
+                {
+                    Debug.Log("YOU PROBABLY ADDED A NEW TYPE OF BUILDING AND DIDNT ADD IT TO GetBuildingType OR YOU PUT THE SCRIPT ON THE OBJECT NOT THE PREFAB");
+                }
+                sourceBuilding.addLine(spheres);
+                sourceBuilding.addTarget(targetBuilding);
+                LineRenderer joe = new GameObject().AddComponent<LineRenderer>();
+                finishedLines.Add(joe);
+
+                startID = 0;
             }
-            //spheres.Clear();
+            spheres.Clear();
             drawState = "disabled";
         }
     }
+    public static Building GetBuildingType(GameObject gameObject)
+    {
+        if (gameObject == null)
+        {
+            Debug.LogError("GameObject is null.");
+            return null;
+        }
+        
+        // Check if the GameObject has MainBase component
+        Main mainBaseComponent = gameObject.GetComponent<Main>();
+        if (mainBaseComponent != null)
+        {
+            return mainBaseComponent;
+        }
+
+        // Check if the GameObject has Tower component
+        Tower towerComponent = gameObject.GetComponent<Tower>();
+        if (towerComponent != null)
+        {
+            return towerComponent;
+        }
+
+        // If the GameObject has neither MainBase nor Tower component
+        Debug.LogWarning("GameObject has neither MainBase nor Tower component.");
+        return null;
+    }
+
 }

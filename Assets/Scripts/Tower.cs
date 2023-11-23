@@ -18,28 +18,22 @@ public class Tower : Building
 
     void Start()
     {
+        StartCommon();
+        sendPeriod = 5;
         InvokeRepeating("Shoot", 1, FireRate);
-        resources = 0;
     }
-    /*
-    void OnCollisionEnter(Collision collision)
-    {
-        // Check if the collision involves the specified layer
-        if (collision.gameObject.layer == 15)
-        {
-            addResources(1);
-            Destroy(collision.gameObject);
-            // The collision involves the target layer
-            // Your code for handling the collision with the specific layer
-        }
-    }*/
 
+    private void Update()
+    {
+        UpdateCommon();
+    }
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 15)
         {
             addResources(1);
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
             // The collision involves the target layer
             // Your code for handling the collision with the specific layer
         }
@@ -80,9 +74,10 @@ public class Tower : Building
         // Check and clean up the Targets list periodically
         CleanUpTargetsList();
 
-        if (Targets.Count <= 0 || !ShootEnabled) return;
+        if (Targets.Count <= 0 || !ShootEnabled || resources <= 0) return;
         projectile.SetTarget(Targets[0]);
         Instantiate(projectile, shootingPoint.position, projectile.transform.rotation);
+        resources--;
     }
 
     private void CleanUpTargetsList()
@@ -90,4 +85,8 @@ public class Tower : Building
         // Remove null entries from the Targets list
         Targets.RemoveAll(target => target == null);
     }
+
+    
+
+    
 }
