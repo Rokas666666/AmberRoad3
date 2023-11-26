@@ -28,10 +28,16 @@ public class GroundEnemy : MonoBehaviour
     [SerializeField]float sightRange, attackRange;
     bool targetInSight, targetInAttack;
 
+    //debuffs
+    [SerializeField]
+    float initialSpeed = 0.5f;
+    private float debuffDuration = 5f;
+
     void Start()
     {
         target = GameObject.FindWithTag("Tower");
         agent = GetComponent<NavMeshAgent>();
+        agent.speed = initialSpeed;
     }
   
     private void Update()
@@ -123,5 +129,21 @@ public class GroundEnemy : MonoBehaviour
             //Debug.Log("Chase target found: " + target.name);
         }
 
+    }
+    public void ApplySpeedDebuff()
+    {
+        if(agent != null)
+        {
+            agent.speed = initialSpeed * 0.5f;
+            StartCoroutine(RemoveDebuff());
+        }
+    }
+    public IEnumerator RemoveDebuff()
+    {
+        yield return new WaitForSeconds(debuffDuration);
+        if (agent != null)
+        {
+            agent.speed = initialSpeed;
+        }
     }
 }

@@ -6,17 +6,21 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField]
-    private GameObject Target;
+    protected GameObject Target;
     [SerializeField]
-    private float MoveSpeed = 1f;
+    protected float MoveSpeed = 1f;
     [SerializeField]
     private string EnemyTag = "Enemy";
     [SerializeField]
     float damage;
+
+    protected float startTime;
+    protected Vector3 startPosition;
     // Start is called before the first frame update
     void Start()
     {
-        
+        startTime = Time.time;
+        startPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -25,7 +29,11 @@ public class Projectile : MonoBehaviour
         if (Target == null) { 
             Destroy(this.gameObject);
             return; }
-        transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, MoveSpeed*Time.deltaTime);
+        Move();
+    }
+    public virtual void Move()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, MoveSpeed * Time.deltaTime);
     }
     public void SetTarget(GameObject target)
     {
