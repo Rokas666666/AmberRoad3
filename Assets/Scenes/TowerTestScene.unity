@@ -375,6 +375,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -462981019419857548, guid: 4b3d23fcafcb9c34fb83831e55961d1d, type: 3}
+--- !u!114 &726427628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726427626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15d5047a39735e74b8aebac057ac3595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourceNode: {fileID: 5958606051778489440, guid: 406dfba8dc1d2a04ca260fd7ca1e52cd,
+    type: 3}
+  maxCount: 5
+  currentCount: 0
 --- !u!1 &750292312
 GameObject:
   m_ObjectHideFlags: 0
@@ -982,9 +998,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 4b3d23fcafcb9c34fb83831e55961d1d,
         type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 4b3d23fcafcb9c34fb83831e55961d1d,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ef7f8a0384399774e80aed5686bde2d4, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 4b3d23fcafcb9c34fb83831e55961d1d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8b86ae78da80d6343b40ebabf4f66f17, type: 2}
     - target: {fileID: 919132149155446097, guid: 4b3d23fcafcb9c34fb83831e55961d1d,
         type: 3}
       propertyPath: m_Name
@@ -1018,6 +1044,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 726427627}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4b3d23fcafcb9c34fb83831e55961d1d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 726427628}
   m_SourcePrefab: {fileID: 100100000, guid: 4b3d23fcafcb9c34fb83831e55961d1d, type: 3}
 --- !u!1 &1532460845
 GameObject:
