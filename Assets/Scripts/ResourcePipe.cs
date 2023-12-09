@@ -5,7 +5,7 @@ using UnityEngine;
 public class ResourcePipe : MonoBehaviour
 {
     [SerializeField]
-    private ResourcePump pump;
+    public ResourcePump pump;
     [SerializeField]
     private ResourceBlob blob;
     [SerializeField]

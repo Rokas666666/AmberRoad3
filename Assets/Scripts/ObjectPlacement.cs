@@ -72,6 +72,7 @@ public class ObjectPlacement : MonoBehaviour
                                 sourceBuilding = GetBuildingType(sourceObject);
                                 targetBuilding = GetBuildingType(hitInfo.collider.gameObject);
                                 //sourceBuilding.target = targetBuilding;
+                                Debug.Log(sourceObject.name + " + " + hitInfo.collider.gameObject.name);
                             }
                         }
                     }
@@ -143,6 +144,12 @@ public class ObjectPlacement : MonoBehaviour
         if (pumpComponent != null)
         {
             return pumpComponent;
+        }
+
+        ResourcePipe pipeComponent = gameObject.GetComponent<ResourcePipe>();
+        if (pipeComponent != null)
+        {
+            return pipeComponent.pump;
         }
 
         // If the GameObject has neither MainBase nor Tower component
