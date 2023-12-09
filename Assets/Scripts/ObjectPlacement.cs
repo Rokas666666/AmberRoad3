@@ -139,6 +139,12 @@ public class ObjectPlacement : MonoBehaviour
             return towerComponent;
         }
 
+        ResourcePump pumpComponent = gameObject.GetComponent<ResourcePump>();
+        if (pumpComponent != null)
+        {
+            return pumpComponent;
+        }
+
         // If the GameObject has neither MainBase nor Tower component
         Debug.LogWarning("GameObject has neither MainBase nor Tower component.");
         return null;
