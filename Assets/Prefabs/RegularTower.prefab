@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1787161402672882155}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ShootingPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,9 +47,10 @@ GameObject:
   - component: {fileID: 8593220552368359527}
   - component: {fileID: 1829921580907019453}
   - component: {fileID: -4211158839210360014}
-  m_Layer: 0
+  - component: {fileID: 7095830801742204227}
+  m_Layer: 11
   m_Name: RegularTower
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -368,3 +369,16 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
+--- !u!114 &7095830801742204227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6025033887495717190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6638c18d318a260468147472c12c4ca9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 200

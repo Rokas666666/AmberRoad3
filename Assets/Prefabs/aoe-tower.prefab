@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 7646952104665555453}
   - component: {fileID: 395046842460518501}
   - component: {fileID: 6074907625340877589}
-  m_Layer: 0
+  - component: {fileID: -4516125958387890448}
+  m_Layer: 11
   m_Name: aoe-tower
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -156,6 +157,19 @@ CapsuleCollider:
   m_Height: 3.228693
   m_Direction: 1
   m_Center: {x: 0, y: 1.6184015, z: 0}
+--- !u!114 &-4516125958387890448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3567277974404761317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6638c18d318a260468147472c12c4ca9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 200
 --- !u!1 &9107916592207661350
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,7 +179,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1374155378333199199}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ShootingPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

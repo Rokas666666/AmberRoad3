@@ -18,7 +18,6 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        towerHP = GameObject.FindWithTag("Tower").GetComponent<HealthManager>();
         rb = GetComponent<Rigidbody>();
         
     }
@@ -40,9 +39,9 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// damage done to towers and buildings
     /// </summary>
-    public void DamageBuilding(float _damage)
+    public void DamageBuilding()
     {
-        towerHP.Damage(_damage);
+        towerHP.Damage(damage);
         
     }
     public void DamageEnemy(float _damage)
@@ -82,5 +81,9 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f); // Adjust the delay as needed
         Destroy(gameObject);
+    }
+    public void SetTargetHPSystem(HealthManager hpsystem)
+    {
+        this.towerHP = hpsystem;
     }
 }

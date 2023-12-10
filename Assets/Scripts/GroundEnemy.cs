@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
 
 public class GroundEnemy : MonoBehaviour
 {
+    private Enemy me;
+
     NavMeshAgent agent;
 
     GameObject target;
 
     [SerializeField] LayerMask groundLayer, targetLayer;
 
-    
+    [SerializeField]
+    private float damageRange = 1.0f;
 
     //patrol
     Vector3 destPoint;
@@ -33,9 +37,14 @@ public class GroundEnemy : MonoBehaviour
     float initialSpeed = 0.5f;
     private float debuffDuration = 5f;
 
+    private float HitDelay = 1.0f;
+
     void Start()
     {
+        me = GetComponent<Enemy>();
         target = GameObject.FindWithTag("Tower");
+        SetTargetHPS();
+        StartCoroutine(HitTower());
         agent = GetComponent<NavMeshAgent>();
         agent.speed = initialSpeed;
     }
@@ -44,7 +53,19 @@ public class GroundEnemy : MonoBehaviour
     {
         targetInSight = Physics.CheckSphere(transform.position, sightRange, targetLayer);
         targetInAttack = Physics.CheckSphere(transform.position, attackRange, targetLayer);
-        
+        if (target == null)
+        {
+            target = GameObject.FindWithTag("Tower");
+            if (target == null)
+            {
+                Patrol();
+            }
+            else
+            {
+                SetTargetHPS();
+                StartCoroutine(HitTower());
+            }
+        }
         if (!targetInSight && !targetInAttack)
         {
             //Debug.Log("Patrol");
@@ -145,5 +166,30 @@ public class GroundEnemy : MonoBehaviour
         {
             agent.speed = initialSpeed;
         }
+    }
+    private void SetTargetHPS()
+    {
+        me.SetTargetHPSystem(target.GetComponent<HealthManager>());
+    }
+    private void DoDamage()
+    {
+        float dist = Vector3.Distance(target.transform.position, gameObject.transform.position);
+        Debug.Log($"Distance to target {dist}");
+        if (dist <= damageRange)
+        {
+            me.DamageBuilding();
+        }
+    }
+    private IEnumerator HitTower()
+    {
+        yield return new WaitForSeconds(HitDelay);
+        while (true)
+        {
+            if (target == null)
+                break;
+            DoDamage();
+            yield return new WaitForSeconds(HitDelay);
+        }
+        yield return null;
     }
 }
