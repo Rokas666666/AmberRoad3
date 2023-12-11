@@ -52,6 +52,22 @@ public class MonsterSpawner : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(transform.position, spawnRange);
     }
+    /// <summary>
+    /// Checks if all waves ended
+    /// </summary>
+    /// <returns>true if all eaves ended and false if not</returns>
+    public bool WavesEnded()
+    {
+        if (currentWave >= waves.Length)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+            
+    }
     void SpawnWave()
     {
         
