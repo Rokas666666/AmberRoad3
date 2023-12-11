@@ -21,22 +21,28 @@ public class MonsterSpawner : MonoBehaviour
     public int enemiesKilled;
     public List<GameObject> currentMonster;
 
+    public float timePassed = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        SpawnWave();
+        if (timePassed > 5)
+        {
+            SpawnWave();
+        }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(currentMonster.Count == 0)
+        if(currentMonster.Count == 0 && timePassed > 5)
         {
             enemiesKilled = 0;
             currentWave++;
             SpawnWave();
         }
+        timePassed += Time.deltaTime;
     }
     /// <summary>
     /// Method for drawing a spawn wange sphere

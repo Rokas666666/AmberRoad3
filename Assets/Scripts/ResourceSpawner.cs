@@ -24,6 +24,10 @@ public class ResourceSpawner : MonoBehaviour
     }
     private void Start()
     {
+        Instantiate(resourceNode, GetRandomPoint(), Quaternion.identity);
+        currentCount++;
+        Instantiate(resourceNode, GetRandomPoint(), Quaternion.identity);
+        currentCount++;
         StartCoroutine(SpawnResource());
     }
 

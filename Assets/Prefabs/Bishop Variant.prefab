@@ -194,9 +194,17 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 2048
+  damageRange: 1
   walkRange: 4.3
   sightRange: 6
   attackRange: 0.34
+  initialSpeed: 0.5
+  Targets: []
+  EnemyTag: 
+  FireRate: 1
+  projectile: {fileID: 0}
+  shootingPoint: {fileID: 0}
+  ShootEnabled: 1
 --- !u!195 &2654207741191474794
 NavMeshAgent:
   m_ObjectHideFlags: 0
