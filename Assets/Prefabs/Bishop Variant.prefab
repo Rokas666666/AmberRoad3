@@ -196,11 +196,11 @@ MonoBehaviour:
     m_Bits: 2048
   damageRange: 1
   walkRange: 4.3
-  sightRange: 6
+  sightRange: 5
   attackRange: 0.34
   initialSpeed: 0.5
   Targets: []
-  EnemyTag: 
+  EnemyTag: Tower
   FireRate: 1
   projectile: {fileID: 0}
   shootingPoint: {fileID: 0}
