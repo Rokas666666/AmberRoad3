@@ -98,9 +98,18 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 2048
+  damageRange: 1
   walkRange: 4.3
   sightRange: 6
   attackRange: 0.34
+  initialSpeed: 0.5
+  Targets: []
+  EnemyTag: Tower
+  FireRate: 1
+  projectile: {fileID: 5815207680983068991, guid: 00853a031903ac14998468ef9e79faf2,
+    type: 3}
+  shootingPoint: {fileID: 268187254001269546}
+  ShootEnabled: 1
 --- !u!195 &1840494336973150679
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -135,6 +144,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 483b1553c79288745a0a88289f9239b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resources: 0
+  target: {fileID: 0}
+  targetList: []
+  sendTime: 0
+  resourceNodeObject: {fileID: 0}
+  sendPeriod: 0
   Targets: []
   EnemyTag: Tower
   FireRate: 1
