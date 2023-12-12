@@ -22,11 +22,13 @@ public class MonsterSpawner : MonoBehaviour
     public List<GameObject> currentMonster;
 
     public float timePassed = 0f;
+    [SerializeField]
+    public float startTime;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (timePassed > 5)
+        if (timePassed > startTime)
         {
             SpawnWave();
         }
@@ -36,7 +38,7 @@ public class MonsterSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(currentMonster.Count == 0 && timePassed > 5)
+        if(currentMonster.Count == 0 && timePassed > startTime)
         {
             enemiesKilled = 0;
             currentWave++;

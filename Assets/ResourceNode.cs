@@ -26,13 +26,14 @@ public class ResourceNode : MonoBehaviour
                 if (pos == line.Count && pos != 0)
                 {
                     RaycastHit hitInfo;
-                    if (Physics.Raycast(transform.position, Vector3.up, out hitInfo, Mathf.Infinity))
+                    /*if (Physics.Raycast(transform.position, Vector3.up, out hitInfo, Mathf.Infinity))
                     {
                         if (hitInfo.collider.gameObject.layer == 11) //TowerLayer
                         {
                             target.addResources(1);
                         }
-                    }
+                    }*/
+                    target.addResources(1);
                     Destroy(gameObject);
                     return;
                 }

@@ -8,7 +8,7 @@ public class ResourceSpawner : MonoBehaviour
     [SerializeField]
     GameObject resourceNode;
     [SerializeField]
-    int maxCount = 5;
+    int maxCount = 10;
     [SerializeField]
     int currentCount;
 
