@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public abstract class Building : MonoBehaviour
 {
@@ -11,11 +12,13 @@ public abstract class Building : MonoBehaviour
     [SerializeField]
     public List<List<GameObject>> lines;
     public List<Building> targetList;
+    public Material lineMat;
 
     public float sendTime = 0.0f;
     public GameObject resourceNodeObject;
     public float sendPeriod;
 
+    public List<LineRenderer> finishedLines;
     public int takeResources(int amount)
     {
         if (amount > resources)
@@ -44,6 +47,14 @@ public abstract class Building : MonoBehaviour
             temp.Add(g);
         }
         lines.Add(temp);
+        finishedLines.Add(new GameObject().AddComponent<LineRenderer>());
+        finishedLines[finishedLines.Count - 1].widthMultiplier = 0.03f; // Adjust the width of the line
+        finishedLines[finishedLines.Count - 1].positionCount = temp.Count;
+        finishedLines[finishedLines.Count - 1].material = lineMat;
+        for (int i = 0; i < temp.Count; i++)
+        {
+            finishedLines[finishedLines.Count - 1].SetPosition(i, temp[i].transform.position);
+        }
     }
 
     public void addTarget(Building t)
@@ -55,6 +66,22 @@ public abstract class Building : MonoBehaviour
     {
         resources = 0;
         lines = new List<List<GameObject>>();
+    }
+
+    public void OnGrab()
+    {
+        foreach (LineRenderer line in finishedLines)
+        {
+            line.enabled = false;
+        }
+        finishedLines = new List<LineRenderer>();
+        lines = new List<List<GameObject>>();
+        Debug.Log("killed lines");
+    }
+
+    public void OffGrab()
+    {
+        Debug.Log("asdsdakkkkkkkkkkkkkkkkkkasdasdas");
     }
 
     public void UpdateCommon()

@@ -16,6 +16,8 @@ public class Tower : Building
     [SerializeField]
     private bool ShootEnabled = true;
 
+    public bool joe = false;
+
     void Start()
     {
         StartCommon();
@@ -86,7 +88,6 @@ public class Tower : Building
         Targets.RemoveAll(target => target == null);
     }
 
-    
 
-    
+
 }

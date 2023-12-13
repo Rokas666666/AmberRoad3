@@ -82,14 +82,14 @@ public class ObjectPlacement : MonoBehaviour
             {
                 drawState = "disabled";
                 
-                
+                /*
                 finishedLines[lineCount - 1].widthMultiplier = 0.03f; // Adjust the width of the line
                 finishedLines[lineCount - 1].positionCount = spheres.Count;
                 finishedLines[lineCount - 1].material = lineMat;
                 for (int i = 0; i < spheres.Count; i++)
                 {
                     finishedLines[lineCount - 1].SetPosition(i, spheres[i].transform.position);
-                }
+                }*/
                 lineCount++;
                 finishedSpheres.Add(spheres);
                 if (sourceBuilding == null)
