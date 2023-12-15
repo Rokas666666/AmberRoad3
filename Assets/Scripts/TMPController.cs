@@ -10,11 +10,15 @@ public class TMPController : MonoBehaviour
 {
     [SerializeField] private TextMeshPro textElement;
     private GameObject mainBase;
-    public MonsterSpawner monsterSpawner; 
+    public MonsterSpawner monsterSpawner;
+    [SerializeField]
+    private Canvas canvas;
+    
 
     // Start is called before the first frame update
     void Start()
     {
+        canvas.enabled = false;
         textElement.enabled = false;
         mainBase = GameObject.Find("castle-tower");
     }
@@ -26,6 +30,7 @@ public class TMPController : MonoBehaviour
         {
             textElement.enabled = true;
             textElement.text = "Defeat";
+            canvas.enabled = true;
         }
 
         // Check if the monster spawner exists and if it has finished all waves
@@ -33,6 +38,7 @@ public class TMPController : MonoBehaviour
         {
             textElement.enabled = true;
             textElement.text = "Victory";
+            canvas.enabled = true;
         }
     }
 }

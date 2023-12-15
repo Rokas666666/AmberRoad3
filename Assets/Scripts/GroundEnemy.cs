@@ -180,7 +180,6 @@ public class GroundEnemy : MonoBehaviour
     private void DoDamage()
     {
         float dist = Vector3.Distance(target.transform.position, gameObject.transform.position);
-        Debug.Log($"Distance to target {dist}");
         if (dist <= damageRange)
         {
             me.DamageBuilding();
