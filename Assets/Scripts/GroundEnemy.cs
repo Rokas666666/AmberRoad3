@@ -39,6 +39,8 @@ public class GroundEnemy : MonoBehaviour
 
     private float HitDelay = 1.0f;
 
+    private Coroutine hitCoroutine;
+
     //[SerializeField]
     //public Tower tower;
 
@@ -69,7 +71,6 @@ public class GroundEnemy : MonoBehaviour
             else
             {
                 SetTargetHPS();
-                StartCoroutine(HitTower());
             }
         }
         if (!targetInSight && !targetInAttack)
@@ -190,12 +191,9 @@ public class GroundEnemy : MonoBehaviour
         yield return new WaitForSeconds(HitDelay);
         while (true)
         {
-            if (target == null)
-                break;
-            DoDamage();
+            if (target != null) DoDamage();
             yield return new WaitForSeconds(HitDelay);
         }
-        yield return null;
     }
 
 
@@ -251,7 +249,7 @@ public class GroundEnemy : MonoBehaviour
         // Check and clean up the Targets list periodically
         CleanUpTargetsList();
 
-        if (Targets.Count <= 0 || !ShootEnabled) return;
+        if (Targets.Count <= 0 || !ShootEnabled || Targets[0] == null || projectile == null) return;
         projectile.SetTarget(Targets[0]);
         Instantiate(projectile, shootingPoint.position, projectile.transform.rotation);
     }

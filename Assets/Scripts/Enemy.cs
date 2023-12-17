@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] float enemyHP = 100;
     Rigidbody rb;
     MonsterSpawner monsterSpawner;
+    AudioSource warcry;
     //GameObject target;
     
     public event Action<Enemy> OnEnemyKilled;
@@ -18,8 +19,9 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        warcry = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
-        
+        if (warcry != null ) warcry.Play();
     }
 
     // Update is called once per frame
