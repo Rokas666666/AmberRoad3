@@ -126,9 +126,11 @@ MonoBehaviour:
   resources: 0
   target: {fileID: 0}
   targetList: []
+  lineMat: {fileID: 0}
   sendTime: 0
   resourceNodeObject: {fileID: 0}
   sendPeriod: 0
+  finishedLines: []
   Targets: []
   EnemyTag: Enemy
   FireRate: 5
@@ -136,6 +138,7 @@ MonoBehaviour:
     type: 3}
   shootingPoint: {fileID: 1374155378333199199}
   ShootEnabled: 1
+  joe: 0
 --- !u!136 &6074907625340877589
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -180,7 +183,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3567277974404761317}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 999999
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}

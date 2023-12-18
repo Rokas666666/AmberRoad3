@@ -10,6 +10,8 @@ TagManager:
   - Landscape
   - Enemy
   - Tower
+  - ResoucePipe
+  - Pump
   layers:
   - Default
   - TransparentFX

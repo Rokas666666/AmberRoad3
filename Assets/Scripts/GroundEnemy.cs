@@ -18,6 +18,7 @@ public class GroundEnemy : MonoBehaviour
     [SerializeField]
     private float damageRange = 1.0f;
 
+
     //patrol
     Vector3 destPoint;
     bool walkPointSet;
@@ -79,12 +80,12 @@ public class GroundEnemy : MonoBehaviour
         }
         if(targetInSight && !targetInAttack)
         {
-            //Debug.Log("Chase");
+            Debug.Log("Chase");
             Chase();
         }
         if(targetInSight && targetInAttack)
         {
-            //Debug.Log("Attack");
+            Debug.Log("Attack");
             Attack();
         }
         /*if (Vector3.Distance(transform.position, destPoint) < 1)
@@ -92,7 +93,11 @@ public class GroundEnemy : MonoBehaviour
             walkPointSet = false;
         }*/
     }
-    
+    bool IsOnNavMesh(Vector3 position)
+    {
+        NavMeshHit hit;
+        return NavMesh.SamplePosition(position, out hit, 0.1f, NavMesh.AllAreas);
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -137,6 +142,26 @@ public class GroundEnemy : MonoBehaviour
         }
         //if(Vector3.Distance(transform.position, destPoint)<10) { walkPointSet = false; }
     }
+    private GameObject FindClosestEnemy()
+    {
+        GameObject closestEnemy = null;
+        float closestDistance = float.MaxValue;
+
+        foreach (var enemy in Targets)
+        {
+            if (enemy != null)
+            {
+                float distance = Vector3.Distance(transform.position, enemy.transform.position);
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closestEnemy = enemy;
+                }
+            }
+        }
+
+        return closestEnemy;
+    }
     void SearchForWalkPoint()
     {
         float Z = Random.Range(-walkRange, walkRange);
@@ -153,7 +178,7 @@ public class GroundEnemy : MonoBehaviour
     {
         if(agent.SetDestination(target.transform.position))
         {
-            //Debug.Log("Chase target found: " + target.name);
+            Debug.Log("Chase target found: " + target.name);
         }
 
     }
