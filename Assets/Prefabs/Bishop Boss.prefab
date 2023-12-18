@@ -195,8 +195,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   damageRange: 1
-  walkRange: 4.3
-  sightRange: 5
+  walkRange: 7
+  sightRange: 20
   attackRange: 0.62
   initialSpeed: 0.5
   Targets: []

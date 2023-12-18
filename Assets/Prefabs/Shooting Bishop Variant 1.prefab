@@ -100,8 +100,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   damageRange: 1
-  walkRange: 4.3
-  sightRange: 6
+  walkRange: 10
+  sightRange: 20
   attackRange: 0.34
   initialSpeed: 0.5
   Targets: []
@@ -161,6 +161,7 @@ MonoBehaviour:
   shootingPoint: {fileID: 268187254001269546}
   ShootEnabled: 1
   joe: 0
+  shootAudio: {fileID: 0}
 --- !u!135 &5040587031290106874
 SphereCollider:
   m_ObjectHideFlags: 0
