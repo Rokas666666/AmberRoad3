@@ -18,6 +18,8 @@ public class Tower : Building
 
     public bool joe = false;
 
+    [SerializeField] AudioSource shootAudio;
+
     void Start()
     {
         StartCommon();
@@ -79,6 +81,7 @@ public class Tower : Building
         if (Targets.Count <= 0 || !ShootEnabled || resources <= 0) return;
         projectile.SetTarget(Targets[0]);
         Instantiate(projectile, shootingPoint.position, projectile.transform.rotation);
+        PlayShootAudio();
         resources--;
     }
 
@@ -89,5 +92,8 @@ public class Tower : Building
     }
 
 
-
+    public void PlayShootAudio()
+    {
+        shootAudio.Play();
+    }
 }
