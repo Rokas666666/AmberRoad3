@@ -60,7 +60,7 @@ public class ObjectPlacement : MonoBehaviour
                 }
                 else if (drawState == "started")
                 {
-                    if (hit.collider.gameObject.name == "Landscape")
+                    if (hit.collider.gameObject.layer == 12)
                     {
                         spheres.Add(newSphere);
                     }

@@ -63,7 +63,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.4961547, y: 4.53, z: -2.809207}
-  m_LocalScale: {x: 2.4, y: 2.4, z: 2.4}
+  m_LocalScale: {x: 4.8, y: 4.8, z: 4.8}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4056390966846785821}
@@ -191,6 +191,7 @@ MonoBehaviour:
   shootingPoint: {fileID: 1524598124531093826}
   ShootEnabled: 1
   joe: 0
+  shootAudio: {fileID: 0}
 --- !u!135 &2057267323201443700
 SphereCollider:
   m_ObjectHideFlags: 0

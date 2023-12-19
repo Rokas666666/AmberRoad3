@@ -17,7 +17,7 @@ public class ResourceBlob : MonoBehaviour
     {
         resourcesLeft = maxResources;
         originalScale = transform.localScale;
-        spawner = GameObject.Find("Landscape").GetComponent<ResourceSpawner>();
+        spawner = GameObject.Find("Terrain").GetComponent<ResourceSpawner>();
     }
 
     // Update is called once per frame
